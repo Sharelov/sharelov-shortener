@@ -1,0 +1,21 @@
+{
+    "name": "sharelov/sharelov-shortener",
+    "description": "A completly configurable tool for shortening urls inside a project",
+    "authors": [
+        {
+            "name": "Sharelov team",
+            "email": "info@sharelov.com"
+        }
+    ],
+    "require": {
+        "php": "^5.3.3 || ^7.0"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-4": {
+            "Sharelov\\Shortener\\":"src/"
+        }
+    }
+}
