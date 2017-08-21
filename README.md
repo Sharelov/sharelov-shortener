@@ -9,7 +9,7 @@ Add private repository to `composer.json` as we are using bitbucket you need to 
 "repositories":[
     {
         "type": "vcs",
-        "url":  "git@bitbucket.org:keiwer/sharelov-shortener.git"
+        "url":  "git clone git@bitbucket.org:chatagency/url_shortner.git"
     }
 ]
 ```
