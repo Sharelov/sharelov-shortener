@@ -23,5 +23,9 @@ class LinkRepository
         return Link::whereHash($hash)->first();
     }
 
+    public function expired($link){
+        return $link && $link->expires && $link->expires_at->diffInDays(null,false) > 0;
+    }
+
 
 }

@@ -25,18 +25,22 @@ class LinksController extends Controller
     {
         try
         {
-            $hash = Shortener::make($request->url);
+            $hash = Shortener::make($request->url,$request->expires_at);
         }
 
         catch (ValidationException $e)
         {
             return response()->json(['success' => 'false','hash'=>'','url'=>'']);
         }
-        $url = url('sh/'.$hash);
-        $value = config('app.sh-domain');
-        if($value){
-            $url = $value."/".$hash;
-        }
+        
+        $domain = config('shortener.domain');
+        $path = config('shortener.path');
+        $url = $domain.'/'.$path.'/'.$hash;
+       
+        if(!filter_var($url, FILTER_VALIDATE_URL)){
+            throw new ValidationException('Can\'t generate a valid url, check your shortener.php configuration');
+        } 
+
         return response()->json(['success' => 'true','hash'=>$hash,'url'=>$url]);
     }
     /*

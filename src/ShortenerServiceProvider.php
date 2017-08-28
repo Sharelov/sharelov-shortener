@@ -14,7 +14,9 @@ class ShortenerServiceProvider extends ServiceProvider{
      */
     public function boot()
     {
-        include __DIR__.'/routes.php';
+        $this->publishes([
+            __DIR__.'/Config/shortener.php' => config_path('shortener.php'),
+        ],'config');
         $this->publishes([
             __DIR__ . '/migrations' => $this->app->databasePath() . '/migrations'
         ], 'migrations');
@@ -31,7 +33,14 @@ class ShortenerServiceProvider extends ServiceProvider{
 
     public function register ()
     {
-        $this->app->bind('Shortener','Sharelov\Shortener\ShortenerService');
-        $this->app->make('Sharelov\Shortener\Controllers\LinksController');
+        $this->mergeConfigFrom(
+            __DIR__.'/Config/shortener.php', 'shortener'
+        );
+        $this->app->bind(
+            'Shortener','Sharelov\Shortener\ShortenerService'
+        );
+        $this->app->make( 
+            'Sharelov\Shortener\Controllers\LinksController' 
+        ); 
     }
 }
