@@ -2,22 +2,10 @@
 
 # Installation
 
-Add private repository to `composer.json` as we are using bitbucket you need to install an ssh key.
+Simply require the package with Composer:
 
-
-```json
-"repositories":[
-    {
-        "type": "vcs",
-        "url":  "git@bitbucket.org:chatagency/url_shortener.git"
-    }
-]
 ```
-
-Require this package in your `composer.json` and update composer. This will download the package.
-
-```json
-"sharelov/sharelov-shortener":"dev-master"
+composer require sharelov/sharelov-shortener
 ```
 After updating composer, add the ServiceProvider to the providers array in `config/app.php`
 
