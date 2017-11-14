@@ -16,10 +16,10 @@ class ShortenerCreateLinksTable extends Migration
         //
         Schema::create('links', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('url')->unique();
             $table->string('hash')->unique();
-            $table->date('expires_at')->nullable();
-            $table->boolean('expires')->default(0);
+            $table->string('url');
+            $table->tinyInteger('expires')->default(0);
+            $table->datetime('expires_at')->nullable();
             $table->timestamps();
         });
     }
