@@ -22,13 +22,9 @@ class ShortenerServiceProvider extends ServiceProvider{
         ], 'migrations');
     }
     /**
-
     * Register the service provider.
-
     *
-
-    *@return void
-
+    * @return void
     */
 
     public function register ()
