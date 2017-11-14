@@ -18,6 +18,8 @@ class ShortenerCreateLinksTable extends Migration
             $table->increments('id');
             $table->string('hash')->unique();
             $table->string('url');
+            $table->string('relation_type')->nullable();
+            $table->integer('relation_id')->nullable()->unsigned();
             $table->tinyInteger('expires')->default(0);
             $table->datetime('expires_at')->nullable();
             $table->timestamps();
