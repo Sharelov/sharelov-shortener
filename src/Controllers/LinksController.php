@@ -22,8 +22,8 @@ class LinksController extends Controller
             return response()->json(['success' => 'false', 'hash' => '', 'url' => '']);
         }
 
-        $domain = config('shortener.domain');
-        $path = config('shortener.path');
+        $domain = trim(rtrim(config('shortener.domain'), "/"));
+        $path = trim(rtrim(config('shortener.path'), "/"));
 
         if (!$domain) {
             throw new ValidationException('Can\'t generate a valid url, check your shortener.php configuration');
