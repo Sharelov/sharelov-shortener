@@ -23,5 +23,5 @@ class Link extends Model
         'hash',
         'expires_at',
         'expires'
-    ];  
+    ];
 }
