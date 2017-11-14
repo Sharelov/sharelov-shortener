@@ -4,7 +4,8 @@
     "authors": [
         {
             "name": "Sharelov team",
-            "email": "info@sharelov.com"
+            "email": "info@sharelov.com", 
+            "homepage":"https://www.sharelov.com" 
         }
     ],
     "require": {
