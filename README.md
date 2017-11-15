@@ -19,11 +19,15 @@ You can use the facade for shorter code. Add this to your aliases:
 'Shortener'=>Sharelov\Shortener\Facades\Shortener::class,
 ```
 
-Finally run `composer dump-autoload` to reload the files, `php artisan vendor:publish` to get the migration files,then run `php artisan migrate` to install links table.
+Then, run `composer dump-autoload`. 
+
+Afterwards, run `php artisan vendor:publish` to get the migration and config files.
+
+Check the config file to look for the table name. You can customize the table name in the config file, so there will be no need to fiddle with the migration yourself. Once you make sure the table name will not cause conflicts with your existing tables, run `php artisan migrate` to install the table we use.
 
 # Usage
 
-Use this route to decode a shortened URL, if the URL don't exist it will run `abort(404)` otherwise it will perform a redirect to the stored url asociated with that hash.
+Use this route to decode a shortened URL, if the URL doesn't exist it will run `abort(404)` otherwise it will perform a redirect to the stored url asociated with that hash.
 ```php
 Route::get('/sh/{hash}',[
     'as'=>'shortener.get',
@@ -31,7 +35,7 @@ Route::get('/sh/{hash}',[
 ]);
 ```
 
-Use this route to short a URL, if the URL already exist on the database it will return the hash code otherwise it will create  a new URL|Hash tuple and it will return a json response with the hash and the url with the current domain indicating the status of the request.
+Use this route to shorten a URL, if the URL already exists on the database it will return the hash code otherwise it will create  a new URL|Hash tuple and it will return a json response with the hash and the url with the current domain indicating the status of the request.
 
 The url recive the next as query parameters:
 
