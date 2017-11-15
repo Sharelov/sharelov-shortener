@@ -1,6 +1,6 @@
 {
     "name": "sharelov/sharelov-shortener",
-    "description": "A completly configurable tool for shortening urls inside a project",
+    "description": "A configurable tool for shortening urls inside a Laravel project.",
     "authors": [
         {
             "name": "Sharelov team",
@@ -9,7 +9,11 @@
         }
     ],
     "require": {
-        "php": "^7.0"
+        "php": "^7.0",
+        "illuminate/support":"~5.4.0",
+        "illuminate/database":"~5.4.0",
+        "illuminate/http":"~5.4.0",
+        "illuminate/validation":"~5.4.0"
     },
     "autoload": {
         "psr-4": {
