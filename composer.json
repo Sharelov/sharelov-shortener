@@ -1,6 +1,7 @@
 {
     "name": "sharelov/sharelov-shortener",
     "description": "A configurable tool for shortening urls inside a Laravel project.",
+    "license":"MIT",
     "authors": [
         {
             "name": "Sharelov team",
