@@ -14,7 +14,7 @@ class ShortenerCreateLinksTable extends Migration
     public function up()
     {
         //
-        Schema::create('links', function (Blueprint $table) {
+        Schema::create(config('shortener.links_table'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('hash')->unique();
             $table->string('url');
@@ -34,6 +34,6 @@ class ShortenerCreateLinksTable extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('links');
+        Schema::dropIfExists(config('shortener.links_table'));
     }
 }
