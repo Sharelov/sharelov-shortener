@@ -93,3 +93,7 @@ After you inovque `vendor:publish` a file by the name shortener.php will appear 
     'domain' =>'http://localhost:8000',
     'path'=>'sh',
 ```
+
+# License
+
+This Laravel package is licensed with the [MIT License](https://choosealicense.com/licenses/mit/#).
