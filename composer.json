@@ -20,5 +20,13 @@
         "psr-4": {
             "Sharelov\\Shortener\\":"src/"
         }
+    },
+    "autoload-dev":{
+        "psr-4":{
+            "Sharelov\\Shortener\\Test\\":"tests"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.4"
     }
 }
