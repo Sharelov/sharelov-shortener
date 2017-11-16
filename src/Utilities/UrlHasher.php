@@ -4,7 +4,7 @@ namespace Sharelov\Shortener\Utilities;
 
 class UrlHasher
 {
-    public function make($url, $length = 5)
+    public function make($length = 5)
     {
         // define alphabet. separated in group types for clarity
         $pool = '0123456789';
