@@ -2,23 +2,23 @@
 
 namespace Sharelov\Shortener\Repositories;
 
-use Sharelov\Shortener\Models\Link;
+use Sharelov\Shortener\Models\ShortLink;
 
-class LinkRepository
+class ShortLinkRepository
 {
     public function create(array $data)
     {
-        return Link::create($data);
+        return ShortLink::create($data);
     }
 
     public function byUrl($url)
     {
-        return Link::whereUrl($url)->first();
+        return ShortLink::whereUrl($url)->first();
     }
 
     public function byHash($hash)
     {
-        return Link::whereHash($hash)->first();
+        return ShortLink::whereHash($hash)->first();
     }
 
     public function expired($link)

@@ -4,7 +4,7 @@ namespace Sharelov\Shortener\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Link extends Model
+class ShortLink extends Model
 {
     
     /**
