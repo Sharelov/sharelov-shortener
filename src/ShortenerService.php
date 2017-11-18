@@ -27,6 +27,18 @@ class ShortenerService
         $this->urlHasher = $urlHasher;
     }
 
+    public function setShortLinkRepository(ShortLinkRepository $linkRepo)
+    {
+        $this->linkRepo = $linkRepo;
+        return $this;
+    }
+
+    public function setUrlHasher(UrlHasher $urlHasher)
+    {
+        $this->urlHasher = $urlHasher;
+        return $this;
+    }
+
     /**
      * Make a short link in the database and return the hash.
      * @param  string $url           The url we want to get a short link for
@@ -52,7 +64,7 @@ class ShortenerService
         $link = $this->linkRepo->byHash($hash);
 
         if (!$link || $this->linkRepo->expired($link)) {
-            throw new NonExistentHashException();
+            return false;
         }
         return $link->url;
     }
