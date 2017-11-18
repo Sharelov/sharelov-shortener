@@ -1,7 +1,7 @@
 <?php
-namespace Sharelov\Shortener\Test;
+namespace Sharelov\Shortener\Test\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Sharelov\Shortener\Tests\TestCase;
 use Sharelov\Shortener\Utilities\UrlHasher;
 
 class HasherTest extends TestCase
@@ -16,5 +16,12 @@ class HasherTest extends TestCase
         $length = 8;
         $hash = (new UrlHasher)->make($length);
         $this->assertEquals($length, strlen($hash));
+    }
+
+    /** @test */
+    public function hashCanBeProducedWithoutSpecifyingLength()
+    {
+        $hash = (new UrlHasher)->make();
+        $this->assertNotEmpty($hash);
     }
 }
