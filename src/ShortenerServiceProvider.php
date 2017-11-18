@@ -17,7 +17,11 @@ class ShortenerServiceProvider extends ServiceProvider
             __DIR__.'/Config/shortener.php' => config_path('shortener.php'),
         ], 'config');
         $this->publishes([
-            __DIR__.'/migrations' => $this->app->databasePath().'/migrations',
+            __DIR__.'/migrations/create_table.php.stub' => database_path('migrations/'
+                                                                         .date('Y_m_d_his', time())
+                                                                         .'_create_'
+                                                                         .config('shortener.links_table')
+                                                                         .'_table.php'),
         ], 'migrations');
     }
 
