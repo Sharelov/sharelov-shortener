@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php"
+         backupGlobals="false"
+         backupStaticAttributes="false"
+         colors="true"
+         verbose="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+>
+    <testsuites>
+        <testsuite name="Unit">
+            <directory suffix=".php">./Tests/Unit</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <env name="APP_KEY" value="07h1sIsJustA7est7ok3nF0r7esting9"/>
+        <env name="APP_ENV" value="testing"/>
+    </php>
+</phpunit>

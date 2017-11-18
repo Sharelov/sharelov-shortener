@@ -4,7 +4,7 @@ namespace Sharelov\Shortener\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Link extends Model
+class ShortLink extends Model
 {
     
     /**
@@ -19,6 +19,8 @@ class Link extends Model
     ];
     
     protected $fillable = [
+        'relation_type',
+        'relation_id',
         'url',
         'hash',
         'expires_at',

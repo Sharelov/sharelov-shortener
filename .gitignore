@@ -1,2 +1,5 @@
 
 .phpintel/*
+vendor/*
+
+vendor/

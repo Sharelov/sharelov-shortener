@@ -11,14 +11,21 @@
     ],
     "require": {
         "php": "^7.0",
-        "illuminate/support":"~5.4.0",
-        "illuminate/database":"~5.4.0",
-        "illuminate/http":"~5.4.0",
-        "illuminate/validation":"~5.4.0"
+        "laravel/framework":"5.4.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.4",
+        "orchestra/testbench": "~3.0",
+        "mockery/mockery": "^1.0"
     },
     "autoload": {
         "psr-4": {
             "Sharelov\\Shortener\\":"src/"
+        }
+    },
+    "autoload-dev":{
+        "psr-4":{
+            "Sharelov\\Shortener\\Tests\\":"Tests"
         }
     }
 }
