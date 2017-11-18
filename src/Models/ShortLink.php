@@ -19,6 +19,8 @@ class ShortLink extends Model
     ];
     
     protected $fillable = [
+        'relation_type',
+        'relation_id',
         'url',
         'hash',
         'expires_at',
