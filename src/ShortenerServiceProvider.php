@@ -16,11 +16,12 @@ class ShortenerServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/Config/shortener.php' => config_path('shortener.php'),
         ], 'config');
+        
         $this->publishes([
-            __DIR__.'/migrations/create_table.php.stub' => database_path('migrations/'
+            __DIR__.'/migrations/create_shortener_table.php.stub' => database_path('migrations/'
                                                                          .date('Y_m_d_his', time())
                                                                          .'_create_'
-                                                                         .config('shortener.links_table')
+                                                                         .'shortener'
                                                                          .'_table.php'),
         ], 'migrations');
     }
@@ -39,7 +40,7 @@ class ShortenerServiceProvider extends ServiceProvider
             'Sharelov\Shortener\ShortenerService'
         );
         $this->app->make(
-            'Sharelov\Shortener\Controllers\LinksController'
+            'Sharelov\Shortener\Controllers\ShortLinksController'
         );
     }
 }

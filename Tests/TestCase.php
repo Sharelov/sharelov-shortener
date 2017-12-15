@@ -30,8 +30,6 @@ class TestCase extends OrchestraTestCase
             'database' => ':memory:',
             'prefix' => '',
         ]);
-
-        $app['config']->set('app.key', '07h1sIsJustA7est7ok3nF0r7esting9');
         $app['config']->set('shortener.links_table', 'short_links');
     }
 
