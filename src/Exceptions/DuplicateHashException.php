@@ -2,6 +2,6 @@
 
 namespace Sharelov\Shortener\Exceptions;
 
-class NonExistentHashException extends \Exception
+class DuplicateHashException extends \Exception
 {
 }

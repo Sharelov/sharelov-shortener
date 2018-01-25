@@ -4,7 +4,7 @@ namespace Sharelov\Shortener\Tests;
 
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
-class TestCase extends OrchestraTestCase
+class TestCaseWithSoftDeletes extends OrchestraTestCase
 {
     /**
      * Custom test fixture setup.
@@ -31,6 +31,7 @@ class TestCase extends OrchestraTestCase
             'prefix' => '',
         ]);
         $app['config']->set('shortener.links_table', 'short_links');
+        $app['config']->set('shortener.enable_soft_deletes', true);
         $app['config']->set('shortener.hash_length', 1);
     }
 

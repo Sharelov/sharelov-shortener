@@ -22,6 +22,9 @@ class CreateShortenerTable extends Migration
             $table->string('url');
             $table->tinyInteger('expires')->default(0);
             $table->datetime('expires_at')->nullable();
+            if (config('enable_soft_deletes')) {
+                $table->softDeletes();
+            }
             $table->timestamps();
         });
     }
