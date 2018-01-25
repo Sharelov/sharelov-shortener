@@ -4,24 +4,26 @@ namespace Sharelov\Shortener\Utilities;
 
 class UrlHasher
 {
-    public function make($length = 5)
+    protected $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-';
+    
+    /**
+     * Generate a new hash
+     * @param  integer $length [description]
+     * @return [type]          [description]
+     */
+    public function make($length=null)
     {
-        // define alphabet. separated in group types for clarity
-        $pool = '0123456789';
-        $pool .= 'abcdefghijklmnopqrstuvwxyz';
-        $pool .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $pool .= '_-~';
-        // initialize the hash var
+        if(!$length || !is_numeric($length)){
+            throw new \Exception("Hash length was not set.");
+        }
+        $pool = $this->pool;
         $hash = "";
-        // count the length of the alphabet pool
         $max = strlen($pool);
 
-        // do the rounds selecting one character until we reach the specified length
         for ($i = 0; $i < $length; ++$i) {
             $hash .= $pool[random_int(0, $max - 1)];
         }
 
-        // we are done, return the hash
         return $hash;
     }
 }
