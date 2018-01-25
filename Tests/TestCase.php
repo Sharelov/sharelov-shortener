@@ -31,11 +31,12 @@ class TestCase extends OrchestraTestCase
             'prefix' => '',
         ]);
         $app['config']->set('shortener.links_table', 'short_links');
+        $app['config']->set('shortener.hash_length', 1);
     }
 
     protected function setUpDatabase($app)
     {
-        include_once __DIR__.'/../src/migrations/create_table.php.stub';
-        (new \CreateTable())->up();
+        include_once __DIR__.'/../src/migrations/create_shortener_table.php.stub';
+        (new \CreateShortenerTable())->up();
     }
 }
