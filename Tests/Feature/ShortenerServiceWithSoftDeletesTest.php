@@ -1,21 +1,22 @@
 <?php
-namespace Sharelov\Shortener\Tests\Unit;
+namespace Sharelov\Shortener\Tests\Feature;
 
 use Carbon\Carbon;
 use Sharelov\Shortener\Models\ShortLink;
+use Sharelov\Shortener\Models\ShortLinkWithSoftDelete;
 use Sharelov\Shortener\Repositories\ShortLinkRepository;
 use Sharelov\Shortener\ShortenerService;
-use Sharelov\Shortener\Tests\TestCase;
+use Sharelov\Shortener\Tests\TestCaseWithSoftDeletes;
 use Sharelov\Shortener\Utilities\UrlHasher;
 
-class ShortenerServiceTest extends TestCase
+class ShortenerServiceWithSoftDeletesTest extends TestCaseWithSoftDeletes
 {
     /** @test */
-    public function modelReturnedByRepositoryDoesNotHaveSoftDeletesAbility()
+    public function modelReturnedByRepositoryHasSoftDeletesAbility()
     {
         $repository = new ShortLinkRepository($this->app['config']['shortener']);
         $model = $repository->getModel();
-        $this->assertContainsOnlyInstancesOf(ShortLink::class, [$model]);
+        $this->assertContainsOnlyInstancesOf(ShortLinkWithSoftDelete::class, [$model]);
     }
 
     /** @test */
