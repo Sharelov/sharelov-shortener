@@ -24,7 +24,7 @@ class ShortenerServiceTest extends TestCase
         $this->assertNotEmpty($stored_link->url);
     }
 
-    /** 
+    /**
      * @test
      * @depends canGenerateHashForUrlAndStoreOnDatabase
      */
