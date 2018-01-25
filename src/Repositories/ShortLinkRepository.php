@@ -8,17 +8,28 @@ use Sharelov\Shortener\Models\ShortLinkWithSoftDelete;
 class ShortLinkRepository
 {
     /**
-     * Shortlinks model to be used in the repository
+     * Shortlinks model to be used in the repository.
+     *
      * @var null
      */
     protected $model = null;
+    protected $model_class_name = null;
 
-    public function __construct()
+    public function __construct($config = null)
     {
-        $this->model = new ShortLink;
+        $this->model = new ShortLink();
+        $this->model_class_name = 'ShortLink';
         if (config('enable_soft_deletes', false)) {
-            $this->model = new ShortLinkWithSoftDelete;
+            $this->model = new ShortLinkWithSoftDelete();
+            $this->model_class_name = 'ShortLinkWithSoftDelete';
         }
+        if ($config) {
+            if (isset($config['enable_soft_deletes']) && $config['enable_soft_deletes']) {
+                $this->model = new ShortLinkWithSoftDelete();
+                $this->model_class_name = 'ShortLinkWithSoftDelete';
+            }
+        }
+
         return $this;
     }
 
@@ -26,7 +37,12 @@ class ShortLinkRepository
     {
         return $this->model;
     }
-    
+
+    public function getModelClassName()
+    {
+        return $this->model_class_name;
+    }
+
     public function create(array $data)
     {
         return $this->model->create($data);
@@ -51,5 +67,4 @@ class ShortLinkRepository
     {
         return $this->byHash($hash)->destroy();
     }
-
 }
