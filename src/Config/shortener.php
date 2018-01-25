@@ -28,4 +28,28 @@ return [
      */
     'links_table' => 'short_links',
 
+    /**
+     * Whether or not to enable soft deletes for the short links
+     * table. Setting this to on, will activate a different
+     * model (one that extends the basic one) which will
+     * use the soft deletes trait.
+     */
+    'enable_soft_deletes' => false,
+
+    /**
+     * Initial length of hashes, they will grow larger once possible
+     * permutations have run its course... 
+     */
+    'hash_length' => 5,
+
+    /**
+     * Amount of tries before growing the hash length. We are by default
+     * using 3 attempts before adding 1 to whatever the hash_length is
+     * set to. This would mean that we tried 3 times to generate a 
+     * unique hash, but each time it generated something already
+     * in our database, so we add +1 to the length to force a
+     * unique hash to be generated on the next attempt.
+     */
+    'max_attempts' => 3,
+
 ];

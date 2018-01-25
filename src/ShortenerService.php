@@ -2,6 +2,8 @@
 
 namespace Sharelov\Shortener;
 
+use Event;
+use Log;
 use Sharelov\Shortener\Exceptions\NonExistentHashException;
 use Sharelov\Shortener\Repositories\ShortLinkRepository;
 use Sharelov\Shortener\Utilities\UrlHasher;
@@ -18,21 +20,59 @@ class ShortenerService
      * The url hasher utility
      * @var null | UrlHasher
      */
-    private $urlHasher = null;
+    protected $urlHasher = null;
 
+    /**
+     * Initial length of hashes
+     */
+    protected $hash_length = null;
+
+    /**
+     * maximum attempts at generating unique hash
+     */
+    protected $max_attempts = null;
+
+    /**
+     * Initialize the class instance with what we need to work out the shortlinks
+     * @param ShortLinkRepository $linkRepo
+     * @param UrlHasher           $urlHasher
+     * @return  this instance
+     */
     public function __construct(ShortLinkRepository $linkRepo, UrlHasher $urlHasher)
     {
-        // Initialize our service class dependencies
         $this->linkRepo = $linkRepo;
         $this->urlHasher = $urlHasher;
+        $this->hash_length = config('hash_length', 5);
+        $this->max_attempts = config('max_attempts', 3);
+        return $this;
     }
 
+    /**
+     * Modify the lengh of the hash programatically
+     * @param int $int Desired length of hash
+     */
+    public function setHashLength($int)
+    {
+        $this->hash_length = $int;
+        return $this;
+    }
+
+    /**
+     * Allow for the repository to be set
+     * @param ShortLinkRepository $linkRepo an instance of the short link repository
+     * @return  this instance
+     */
     public function setShortLinkRepository(ShortLinkRepository $linkRepo)
     {
         $this->linkRepo = $linkRepo;
         return $this;
     }
 
+    /**
+     * Set the url hasher instance
+     * @param UrlHasher $urlHasher instance of the url hasher
+     * @return  this instance
+     */
     public function setUrlHasher(UrlHasher $urlHasher)
     {
         $this->urlHasher = $urlHasher;
@@ -75,22 +115,17 @@ class ShortenerService
      * @param  string $expires_at Datetime string following ISO-8601: YYYY-MM-DD hh:mm:ss
      * @return string $hash       The unique hash generated
      */
-    private function makeHash($url, $expires_at = null, $relation_type = null, $relation_id = null)
+    protected function makeHash($url, $expires_at = null, $relation_type = null, $relation_id = null)
     {
-        // first, generate a unique hash for this url (5 is default length)
-        $hash = $this->urlHasher->make();
+        $length = $this->hash_length;
+        $hash = $this->urlHasher->make($length);
         
         if ($this->getUrlByHash($hash)) {
-            $length = 5; // use default hash starting length
-            $tries = 1; // we already tried once
+            $tries = 1;
             do {
                 $hash = $this->urlHasher->make($length);
                 $tries++;
-                if ($tries > 3) {
-                    // add one more char to hash and reset
-                    // attempts counter to generate unique
-                    // hash faster and not sit on this loop
-                    // eternally
+                if ($tries > $this->max_attempts) {
                     $length++;
                     $tries = 1;
                 }
@@ -98,14 +133,16 @@ class ShortenerService
         }
 
         $expires_at ? $expires = true : $expires = false;
-
-        $relation_id = (is_numeric($relation_id) ? $relation_id : null);
-
+        try{
+            if (!is_numeric($relation_id)) {
+                throw new \Exception("Relation id was not numeric for url: ".$url);
+            }
+        } catch (\Exception $e) {
+            Log::error("ERROR: ".$e->getMessage());
+        }
         $data = compact('url', 'hash', 'expires_at', 'expires', 'relation_type', 'relation_id');
-
-        \Event::fire('ShortLink.creating', [$data]);
-        $this->linkRepo->create($data);
-
-        return $hash;
+        Event::fire($this->linkRepo->getModelClassName().'.creating', [$data]);
+        
+        return $this->linkRepo->create($data);
     }
 }

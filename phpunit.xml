@@ -14,6 +14,9 @@
         <testsuite name="Unit">
             <directory suffix=".php">./Tests/Unit</directory>
         </testsuite>
+        <testsuite name="Feature">
+            <directory suffix=".php">./Tests/Feature</directory>
+        </testsuite>
     </testsuites>
     <php>
         <env name="APP_KEY" value="07h1sIsJustA7est7ok3nF0r7esting9"/>
