@@ -28,4 +28,12 @@ return [
      */
     'links_table' => 'short_links',
 
+    /**
+     * Whether or not to enable soft deletes for the short links
+     * table. Setting this to on, will activate a different
+     * model (one that extends the basic one) which will
+     * use the soft deletes trait.
+     */
+    'enable_soft_deletes' => false,
+
 ];
