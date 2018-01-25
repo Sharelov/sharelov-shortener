@@ -2,6 +2,7 @@
 
 namespace Sharelov\Shortener;
 
+use Event;
 use Sharelov\Shortener\Exceptions\NonExistentHashException;
 use Sharelov\Shortener\Repositories\ShortLinkRepository;
 use Sharelov\Shortener\Utilities\UrlHasher;
@@ -20,19 +21,35 @@ class ShortenerService
      */
     private $urlHasher = null;
 
+    /**
+     * Initialize the class instance with what we need to work out the shortlinks
+     * @param ShortLinkRepository $linkRepo
+     * @param UrlHasher           $urlHasher
+     * @return  this instance
+     */
     public function __construct(ShortLinkRepository $linkRepo, UrlHasher $urlHasher)
     {
-        // Initialize our service class dependencies
         $this->linkRepo = $linkRepo;
         $this->urlHasher = $urlHasher;
+        return $this;
     }
 
+    /**
+     * Allow for the repository to be set
+     * @param ShortLinkRepository $linkRepo an instance of the short link repository
+     * @return  this instance
+     */
     public function setShortLinkRepository(ShortLinkRepository $linkRepo)
     {
         $this->linkRepo = $linkRepo;
         return $this;
     }
 
+    /**
+     * Set the url hasher instance
+     * @param UrlHasher $urlHasher instance of the url hasher
+     * @return  this instance
+     */
     public function setUrlHasher(UrlHasher $urlHasher)
     {
         $this->urlHasher = $urlHasher;
@@ -103,7 +120,7 @@ class ShortenerService
 
         $data = compact('url', 'hash', 'expires_at', 'expires', 'relation_type', 'relation_id');
 
-        \Event::fire('ShortLink.creating', [$data]);
+        Event::fire('ShortLink.creating', [$data]);
         $this->linkRepo->create($data);
 
         return $hash;
