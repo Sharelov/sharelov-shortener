@@ -11,12 +11,19 @@ use Sharelov\Shortener\Utilities\UrlHasher;
 class ShortenerServiceTest extends TestCase
 {
     /** @test */
+    public function modelReturnedByRepositoryDoesNotHaveSoftDeletesAbility()
+    {
+        $repository = new ShortLinkRepository($this->app['config']['shortener']);
+        $model = $repository->getModel();
+        $this->assertContainsOnlyInstancesOf(ShortLink::class, [$model]);
+    }
+
+    /** @test */
     public function canGenerateHashForUrlAndStoreOnDatabase()
     {
-        $shortener_service = app(ShortenerService::class)->setUrlHasher((new UrlHasher()))
-        ->setShortLinkRepository(new ShortLinkRepository());
+        $shortener_service = (new ShortenerService((new ShortLinkRepository()), (new UrlHasher())));
         
-        $hash = $shortener_service->make('https://www.testing.com');
+        $hash = $shortener_service->make('https://www.testing.com')->hash;
         $this->assertNotEmpty($hash);
 
         $stored_link = ShortLink::first();
@@ -31,11 +38,10 @@ class ShortenerServiceTest extends TestCase
     public function canGenerateHashForUrlAndStoreOnDatabaseThatsExpired()
     {
         $repo = new ShortLinkRepository();
-        $shortener_service = app(ShortenerService::class)->setUrlHasher((new UrlHasher()))
-        ->setShortLinkRepository($repo);
+        $shortener_service = (new ShortenerService($repo, (new UrlHasher())));
         
         // generate a url that expired yesterday
-        $hash = $shortener_service->make('https://www.testing.com', Carbon::yesterday());
+        $hash = $shortener_service->make('https://www.testing.com', Carbon::yesterday())->hash;
         $this->assertNotEmpty($hash);
 
         // fetch that expired url
@@ -45,5 +51,25 @@ class ShortenerServiceTest extends TestCase
         // make sure it is expired
         $expired = $repo->expired($stored_link);
         $this->assertTrue($expired);
+    }
+
+    /** @test */
+    public function canGenerateHashAndAutoGrow()
+    {
+
+        $shortener_service = (new ShortenerService((new ShortLinkRepository()), (new UrlHasher())));
+
+        $hash="";
+        $i =0;
+        while (true) {
+            // set length to 1 to make this faster
+            $hash = $shortener_service->setHashLength(1)->make('https://www.testing.com/'.$hash)->hash;
+            // if by 125 loops hash != 2 assertion should fail
+            if ($i > 125) {
+                $this->assertEquals(strlen($hash), 2);
+                break;
+            }
+            $i++;
+        }
     }
 }
