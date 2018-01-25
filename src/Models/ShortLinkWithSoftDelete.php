@@ -2,6 +2,7 @@
 
 namespace Sharelov\Shortener\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Sharelov\Shortener\Models\ShortLink;
 
 class ShortLinkWithSoftDelete extends ShortLink
