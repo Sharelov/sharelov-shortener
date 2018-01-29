@@ -23,10 +23,10 @@ class ShortenerServiceTest extends TestCase
     {
         $shortener_service = (new ShortenerService((new ShortLinkRepository()), (new UrlHasher())));
         
-        $hash = $shortener_service->make('https://www.testing.com')->hash;
-        $this->assertNotEmpty($hash);
+        $link = $shortener_service->make('https://www.testing.com');
+        $this->assertNotEmpty($link->hash);
 
-        $stored_link = ShortLink::first();
+        $stored_link = ShortLink::find($link->id);
         $this->assertNotEmpty($stored_link);
         $this->assertNotEmpty($stored_link->url);
     }
