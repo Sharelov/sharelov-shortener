@@ -14,20 +14,37 @@ class ShortenerServiceWithSoftDeletesTest extends TestCaseWithSoftDeletes
     /** @test */
     public function modelReturnedByRepositoryHasSoftDeletesAbility()
     {
-        $repository = new ShortLinkRepository($this->app['config']['shortener']);
+        $repository = new ShortLinkRepository($this->app->config['shortener']);
         $model = $repository->getModel();
         $this->assertContainsOnlyInstancesOf(ShortLinkWithSoftDelete::class, [$model]);
     }
 
     /** @test */
+    public function modelHasDeletedAtColumnPresent()
+    {
+        $repository = new ShortLinkRepository($this->app->config['shortener']);
+        
+        $shortener_service = (new ShortenerService($repository, (new UrlHasher())));
+        
+        $link = $shortener_service->make('https://www.testing.com');
+        $this->assertContainsOnlyInstancesOf(ShortLinkWithSoftDelete::class, [$link]);
+        $link->delete();
+        $this->assertEquals(isset($link->deleted_at), true);
+        $this->assertNotEmpty($link->hash);
+    }
+
+    /** @test */
     public function canGenerateHashForUrlAndStoreOnDatabase()
     {
-        $shortener_service = (new ShortenerService((new ShortLinkRepository()), (new UrlHasher())));
+        $shortener_service = (new ShortenerService(
+            (new ShortLinkRepository($this->app->config['shortener'])),
+            (new UrlHasher())
+        ));
         
-        $hash = $shortener_service->make('https://www.testing.com')->hash;
-        $this->assertNotEmpty($hash);
+        $link = $shortener_service->make('https://www.testing.com');
+        $this->assertNotEmpty($link->hash);
 
-        $stored_link = ShortLink::first();
+        $stored_link = ShortLink::find($link->id);
         $this->assertNotEmpty($stored_link);
         $this->assertNotEmpty($stored_link->url);
     }
@@ -38,15 +55,15 @@ class ShortenerServiceWithSoftDeletesTest extends TestCaseWithSoftDeletes
      */
     public function canGenerateHashForUrlAndStoreOnDatabaseThatsExpired()
     {
-        $repo = new ShortLinkRepository();
+        $repo = new ShortLinkRepository($this->app->config['shortener']);
         $shortener_service = (new ShortenerService($repo, (new UrlHasher())));
         
         // generate a url that expired yesterday
-        $hash = $shortener_service->make('https://www.testing.com', Carbon::yesterday())->hash;
-        $this->assertNotEmpty($hash);
+        $link = $shortener_service->make('https://www.testing.com', Carbon::yesterday());
+        $this->assertNotEmpty($link->hash);
 
         // fetch that expired url
-        $stored_link = $repo->byHash($hash);
+        $stored_link = $repo->byHash($link->hash);
         $this->assertNotEmpty($stored_link);
 
         // make sure it is expired
@@ -58,7 +75,10 @@ class ShortenerServiceWithSoftDeletesTest extends TestCaseWithSoftDeletes
     public function canGenerateHashAndAutoGrow()
     {
 
-        $shortener_service = (new ShortenerService((new ShortLinkRepository()), (new UrlHasher())));
+        $shortener_service = (new ShortenerService(
+            (new ShortLinkRepository($this->app->config['shortener'])),
+            (new UrlHasher())
+        ));
 
         $hash="";
         $i =0;
