@@ -1,4 +1,8 @@
-## Sharelov-Shortener
+## Sharelov : URL Shortener
+
+[
+![StyleCI](https://styleci.io/repos/119410228/shield?branch=develop)
+](https://styleci.io/repos/119410228)
 
 # Installation
 
@@ -95,5 +99,4 @@ After you inovque `vendor:publish` a file by the name shortener.php will appear 
 ```
 
 # License
-
 This Laravel package is licensed with the [MIT License](https://choosealicense.com/licenses/mit/#).
