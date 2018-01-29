@@ -1,8 +1,12 @@
 ## Sharelov : URL Shortener
 
 [
-![StyleCI](https://styleci.io/repos/119410228/shield?branch=develop)
+![StyleCI](https://styleci.io/repos/119410228/shield?style=plastic&branch=develop)
 ](https://styleci.io/repos/119410228)
+
+[
+![CircleCI](https://circleci.com/gh/Sharelov/sharelov-shortener/tree/develop.svg?style=svg)
+](https://circleci.com/gh/Sharelov/sharelov-shortener/tree/develop)
 
 # Installation
 
