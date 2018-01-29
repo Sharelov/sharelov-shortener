@@ -2,10 +2,10 @@
 
 namespace Sharelov\Shortener\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Shortener;
+use Illuminate\Http\Request;
 use Sharelov\Shortener\Exceptions\NonExistentHashException;
+use Shortener;
 
 class ShortLinksController extends Controller
 {
@@ -22,8 +22,8 @@ class ShortLinksController extends Controller
             return response()->json(['success' => 'false', 'hash' => '', 'url' => '']);
         }
 
-        $domain = trim(rtrim(config('shortener.domain'), "/"));
-        $path = trim(rtrim(config('shortener.path'), "/"));
+        $domain = trim(rtrim(config('shortener.domain'), '/'));
+        $path = trim(rtrim(config('shortener.path'), '/'));
 
         if (!$domain) {
             throw new ValidationException('Can\'t generate a valid url, check your shortener.php configuration');

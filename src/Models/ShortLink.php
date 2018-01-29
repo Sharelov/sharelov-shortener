@@ -6,26 +6,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShortLink extends Model
 {
-    
     /**
-    * The attributes that should be mutated to dates.
-    *
-    * @var array
-    */
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
     protected $dates = [
         'created_at',
         'updated_at',
-        'expires_at'
+        'expires_at',
     ];
 
     /**
-     * Guarded columns array
-     * @var  array
+     * Guarded columns array.
+     *
+     * @var array
      */
     protected $guarded = [];
-    
+
     /**
-     * Fillable database columns
+     * Fillable database columns.
+     *
      * @var array
      */
     protected $fillable = [
@@ -34,11 +35,12 @@ class ShortLink extends Model
         'url',
         'hash',
         'expires_at',
-        'expires'
+        'expires',
     ];
 
     /**
-     * Table name filled from config via getTable()
+     * Table name filled from config via getTable().
+     *
      * @var string
      */
     protected $table;
@@ -46,6 +48,7 @@ class ShortLink extends Model
     public function getTable()
     {
         $this->table = config('shortener.links_table');
+
         return $this->table;
     }
 }

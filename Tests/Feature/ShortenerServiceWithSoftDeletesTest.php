@@ -1,4 +1,5 @@
 <?php
+
 namespace Sharelov\Shortener\Tests\Feature;
 
 use Carbon\Carbon;
@@ -23,9 +24,9 @@ class ShortenerServiceWithSoftDeletesTest extends TestCaseWithSoftDeletes
     public function modelHasDeletedAtColumnPresent()
     {
         $repository = new ShortLinkRepository($this->app->config['shortener']);
-        
+
         $shortener_service = (new ShortenerService($repository, (new UrlHasher())));
-        
+
         $link = $shortener_service->make('https://www.testing.com');
         $this->assertContainsOnlyInstancesOf(ShortLinkWithSoftDelete::class, [$link]);
         $link->delete();
@@ -40,7 +41,7 @@ class ShortenerServiceWithSoftDeletesTest extends TestCaseWithSoftDeletes
             (new ShortLinkRepository($this->app->config['shortener'])),
             (new UrlHasher())
         ));
-        
+
         $link = $shortener_service->make('https://www.testing.com');
         $this->assertNotEmpty($link->hash);
 
@@ -57,7 +58,7 @@ class ShortenerServiceWithSoftDeletesTest extends TestCaseWithSoftDeletes
     {
         $repo = new ShortLinkRepository($this->app->config['shortener']);
         $shortener_service = (new ShortenerService($repo, (new UrlHasher())));
-        
+
         // generate a url that expired yesterday
         $link = $shortener_service->make('https://www.testing.com', Carbon::yesterday());
         $this->assertNotEmpty($link->hash);
@@ -74,14 +75,13 @@ class ShortenerServiceWithSoftDeletesTest extends TestCaseWithSoftDeletes
     /** @test */
     public function canGenerateHashAndAutoGrow()
     {
-
         $shortener_service = (new ShortenerService(
             (new ShortLinkRepository($this->app->config['shortener'])),
             (new UrlHasher())
         ));
 
-        $hash="";
-        $i =0;
+        $hash = '';
+        $i = 0;
         while (true) {
             // set length to 1 to make this faster
             $hash = $shortener_service->setHashLength(1)->make('https://www.testing.com/'.$hash)->hash;

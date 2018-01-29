@@ -113,9 +113,9 @@ class ShortenerService
      *
      * @param string $hash The hash generated for the url you are looking for
      *
-     * @return string The url if one was found and no exceptioin is thrown
-     *
      * @throws NonExistentHashException if no link is found for given hash
+     *
+     * @return string The url if one was found and no exceptioin is thrown
      */
     public function getUrlByHash($hash)
     {
@@ -145,15 +145,16 @@ class ShortenerService
             $tries = 1;
             do {
                 $hash = $this->urlHasher->make($length);
-                ++$tries;
+                $tries++;
                 if ($tries > $this->max_attempts) {
-                    ++$length;
+                    $length++;
                     $tries = 1;
                 }
             } while ($this->getUrlByHash($hash));
         }
 
         $expires_at ? $expires = true : $expires = false;
+
         try {
             if (!is_numeric($relation_id)) {
                 throw new \Exception('Relation id was not numeric for url: '.$url);

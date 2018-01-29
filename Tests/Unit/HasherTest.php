@@ -1,4 +1,5 @@
 <?php
+
 namespace Sharelov\Shortener\Test\Unit;
 
 use Sharelov\Shortener\Tests\TestCase;
@@ -11,28 +12,28 @@ class HasherTest extends TestCase
     {
         $length = rand(3, 50);
         // echo "\nGoing for a hash with length=".$length."\n";
-        $hash = (new UrlHasher)->make($length);
+        $hash = (new UrlHasher())->make($length);
         // echo $hash."\n";
         $this->assertEquals($length, strlen($hash));
 
         $length = rand(51, 100);
         // echo "\nGoing for a hash with length=".$length."\n";
-        $hash = (new UrlHasher)->make($length);
+        $hash = (new UrlHasher())->make($length);
         // echo $hash."\n";
         $this->assertEquals($length, strlen($hash));
 
         $length = rand(100, 150);
         // echo "\nGoing for a hash with length=".$length."\n";
-        $hash = (new UrlHasher)->make($length);
+        $hash = (new UrlHasher())->make($length);
         // echo $hash."\n";
         $this->assertEquals($length, strlen($hash));
     }
 
     /** @test
-    * @expectedException \Exception
-    */
+     * @expectedException \Exception
+     */
     public function hashCantBeProducedWithoutSpecifyingLength()
     {
-        $hash = (new UrlHasher)->make();
+        $hash = (new UrlHasher())->make();
     }
 }
