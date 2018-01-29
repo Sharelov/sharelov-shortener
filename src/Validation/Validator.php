@@ -20,6 +20,7 @@ abstract class Validator
         if ($validation->fails()) {
             throw new ValidationExeption($validation->messages());
         }
+
         return true;
     }
 }
