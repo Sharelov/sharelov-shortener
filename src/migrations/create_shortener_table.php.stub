@@ -19,10 +19,10 @@ class CreateShortenerTable extends Migration
             $table->string('relation_type')->nullable();
             $table->integer('relation_id')->unsigned()->nullable();
             $table->string('hash')->unique();
-            $table->string('url');
+            $table->mediumText('url');
             $table->tinyInteger('expires')->default(0);
             $table->datetime('expires_at')->nullable();
-            if (config('enable_soft_deletes')) {
+            if (config('shortener.enable_soft_deletes')) {
                 $table->softDeletes();
             }
             $table->timestamps();

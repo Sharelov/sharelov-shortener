@@ -17,7 +17,17 @@ class ShortLink extends Model
         'updated_at',
         'expires_at'
     ];
+
+    /**
+     * Guarded columns array
+     * @var  array
+     */
+    protected $guarded = [];
     
+    /**
+     * Fillable database columns
+     * @var array
+     */
     protected $fillable = [
         'relation_type',
         'relation_id',
@@ -26,4 +36,16 @@ class ShortLink extends Model
         'expires_at',
         'expires'
     ];
+
+    /**
+     * Table name filled from config via getTable()
+     * @var string
+     */
+    protected $table;
+
+    public function getTable()
+    {
+        $this->table = config('shortener.links_table');
+        return $this->table;
+    }
 }
