@@ -18,22 +18,23 @@ jobs:
 
     steps:
       - checkout
+      - run: which composer
       - run: sudo apt install -y libsqlite3-dev zlib1g-dev
       - run: sudo docker-php-ext-install zip
       - run: sudo composer self-update
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "composer.json" }}
+          - composer-v1-{{ checksum "composer.json" }}
           # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+          - composer-v1-
 
-      - run: composer install -n --prefer-dist
+      - run: composer install -n --prefer-dist --ignore-platform-reqs
 
       - save_cache:
           paths:
             - ./vendor
-          key: v1-dependencies-{{ checksum "composer.json" }}
+          key: composer-v1-{{ checksum "composer.json" }}
         
       # run tests!
       - run: phpunit
