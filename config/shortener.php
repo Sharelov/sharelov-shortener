@@ -1,6 +1,7 @@
 <?php
 
 return [
+
     /*
      * Domain used when generating short urls. The short domain makes the urls
      * with hashes that are saved to the database. Ideally, this should be a
@@ -12,6 +13,7 @@ return [
      * could also host the url shortener on a separate api-like service
      * and work out your own implementation.
      */
+
     'domain' => env('SHORTENER_URL', env('APP_URL')),
 
     /*
@@ -20,12 +22,14 @@ return [
      * shorter urls. If you set this to "short", it would use the value
      * of domain/path/hash to generate your shortened urls.
      */
+
     'path'=> null,
 
     /*
      * Name of the table to use in the migration. We use short_links as default
      * but you can change it to anything you wish to use in your project.
      */
+
     'links_table' => 'short_links',
 
     /*
@@ -34,12 +38,14 @@ return [
      * model (one that extends the basic one) which will
      * use the soft deletes trait.
      */
+
     'enable_soft_deletes' => false,
 
     /*
      * Initial length of hashes, they will grow larger once possible
      * permutations have run its course...
      */
+
     'hash_length' => 5,
 
     /*
@@ -50,6 +56,7 @@ return [
      * in our database, so we add +1 to the length to force a
      * unique hash to be generated on the next attempt.
      */
+
     'max_attempts' => 3,
 
 ];

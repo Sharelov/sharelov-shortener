@@ -36,7 +36,8 @@ class TestCase extends OrchestraTestCase
 
     protected function setUpDatabase($app)
     {
-        include_once __DIR__.'/../src/migrations/create_shortener_table.php.stub';
+        include_once __DIR__.'/../database/migrations/create_shortener_table.php.stub';
+
         (new \CreateShortenerTable())->up();
     }
 }
