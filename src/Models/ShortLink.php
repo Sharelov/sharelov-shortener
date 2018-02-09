@@ -36,8 +36,8 @@ class ShortLink extends Model
      */
     public function __construct(array $attributes = [])
     {
-        if (collect(class_uses_recursive(__CLASS__))->contains(SoftDeletes::class)) {
-            array_push($this->dates, 'expires_at');
+        if (collect(class_uses_recursive($this))->contains(SoftDeletes::class)) {
+            array_push($this->dates, 'deleted_at');
         }
 
         parent::__construct($attributes);
