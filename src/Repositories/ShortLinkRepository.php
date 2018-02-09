@@ -19,15 +19,10 @@ class ShortLinkRepository
     {
         $this->model = new ShortLink();
         $this->model_class_name = 'ShortLink';
-        if (config('enable_soft_deletes', false)) {
+
+        if (config('shortener.enable_soft_deletes') || array_get($config, 'enable_soft_deletes')) {
             $this->model = new ShortLinkWithSoftDelete();
             $this->model_class_name = 'ShortLinkWithSoftDelete';
-        }
-        if ($config) {
-            if (isset($config['enable_soft_deletes']) && $config['enable_soft_deletes']) {
-                $this->model = new ShortLinkWithSoftDelete();
-                $this->model_class_name = 'ShortLinkWithSoftDelete';
-            }
         }
 
         return $this;

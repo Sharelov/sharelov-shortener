@@ -4,6 +4,9 @@ namespace Sharelov\Shortener\Utilities;
 
 class UrlHasher
 {
+    /**
+     * @var string
+     */
     protected $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-';
 
     /**
@@ -11,13 +14,15 @@ class UrlHasher
      *
      * @param int $length [description]
      *
-     * @return [type] [description]
+     * @return string [type] [description]
+     * @throws \Exception
      */
     public function make($length = null)
     {
-        if (!$length || !is_numeric($length)) {
+        if (! $length || ! is_numeric($length)) {
             throw new \Exception('Hash length was not set.');
         }
+
         $pool = $this->pool;
         $hash = '';
         $max = strlen($pool);
