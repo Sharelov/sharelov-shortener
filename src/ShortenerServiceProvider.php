@@ -3,7 +3,6 @@
 namespace Sharelov\Shortener;
 
 use Illuminate\Support\ServiceProvider;
-use Sharelov\Shortener\ShortenerService;
 
 class ShortenerServiceProvider extends ServiceProvider
 {
