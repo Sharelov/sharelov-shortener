@@ -26,9 +26,9 @@ class TestCase extends OrchestraTestCase
         // Setup default database to use sqlite :memory:
         $app['config']->set('database.default', 'testbench');
         $app['config']->set('database.connections.testbench', [
-            'driver' => 'sqlite',
+            'driver'   => 'sqlite',
             'database' => ':memory:',
-            'prefix' => '',
+            'prefix'   => '',
         ]);
         $app['config']->set('shortener.links_table', 'short_links');
         $app['config']->set('shortener.hash_length', 1);
@@ -36,7 +36,8 @@ class TestCase extends OrchestraTestCase
 
     protected function setUpDatabase($app)
     {
-        include_once __DIR__.'/../src/migrations/create_shortener_table.php.stub';
+        include_once __DIR__.'/../database/migrations/create_shortener_table.php.stub';
+
         (new \CreateShortenerTable())->up();
     }
 }

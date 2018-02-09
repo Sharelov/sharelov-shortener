@@ -1,4 +1,5 @@
 <?php
+
 namespace Sharelov\Shortener\Tests;
 
 use Illuminate\Database\Eloquent\Model;

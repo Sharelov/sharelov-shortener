@@ -1,29 +1,42 @@
-## Sharelov-Shortener
+## Sharelov : URL Shortener
+
+[
+![StyleCI](https://styleci.io/repos/119410228/shield?style=plastic&branch=develop)
+](https://styleci.io/repos/119410228) [
+![CircleCI](https://circleci.com/gh/Sharelov/sharelov-shortener/tree/develop.svg?style=svg)
+](https://circleci.com/gh/Sharelov/sharelov-shortener/tree/develop)
 
 # Installation
 
-Simply require the package with Composer:
-
+Require the package with Composer:
 ```
 composer require sharelov/sharelov-shortener
 ```
-After updating composer, add the ServiceProvider to the providers array in `config/app.php`
 
+After that, add the ServiceProvider to the providers array in `config/app.php`
 ```php
 Sharelov\Shortener\ShortenerServiceProvider::class,
 ```
 
-You can use the facade for shorter code. Add this to your aliases:
-
+You can optionally use the facade. If you decide to use it, add this to your aliases array in `config/app.php`:
 ```php
 'Shortener'=>Sharelov\Shortener\Facades\Shortener::class,
 ```
 
-Then, run `composer dump-autoload`. 
+Then, run `composer dump-autoload`.
 
 Afterwards, run `php artisan vendor:publish` to get the migration and config files.
 
-Check the config file to look for the table name. You can customize the table name in the config file, so there will be no need to fiddle with the migration yourself. Once you make sure the table name will not cause conflicts with your existing tables, run `php artisan migrate` to install the table we use.
+# Configuration
+
+The config file has important configuration you may want to look at and customize before running the migrations. If you haven't looked at it yet, you can customize the table name in the config file, so there will be no need to fiddle with the migration yourself. Once you make sure the table name will not cause conflicts with your existing tables, run `php artisan migrate` to install the table we use.
+
+There is also the posibility to configure any of the following things:
+- Hash length. (Default = 5)
+- Maximum attempts at generating a unique hash. (Default = 3)
+- Usage of Soft Deletes with your short links model. (Default = false)
+
+There is ample documentation for each option in the config file. Feel free to trim it down after having looked it over and setting it up.
 
 # Usage
 
@@ -73,7 +86,7 @@ Unsuccessfull json response
 }
 ```
 
-For using the facade don't forguet to include it `use Shortener;` and then you can call the next methods:
+For using the facade don't forget to include it `use Shortener;` and then you can call the next methods:
 
 Returns the hash for the url sended as a parameter and stores an object in the links table.
 ```php
@@ -85,15 +98,5 @@ Returns the url corresponding to a hash string in the database.
 Shortener::getUrlByHash($hash)
 ```
 
-# Configuration
-
-After you inovque `vendor:publish` a file by the name shortener.php will appear on the config folder, you can then specify there the domain name and the url to build the shortened urls. You could use these same configuration file for building the entry point for retrieving the urls.
-
-```php
-    'domain' =>'http://localhost:8000',
-    'path'=>'sh',
-```
-
 # License
-
 This Laravel package is licensed with the [MIT License](https://choosealicense.com/licenses/mit/#).

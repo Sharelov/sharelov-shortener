@@ -3,30 +3,24 @@
 namespace Sharelov\Shortener\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ShortLink extends Model
 {
-    
     /**
-    * The attributes that should be mutated to dates.
-    *
-    * @var array
-    */
+     * {@inheritdoc}
+     */
     protected $dates = [
-        'created_at',
-        'updated_at',
-        'expires_at'
+        'expires_at',
     ];
 
     /**
-     * Guarded columns array
-     * @var  array
+     * {@inheritdoc}
      */
     protected $guarded = [];
-    
+
     /**
-     * Fillable database columns
-     * @var array
+     * {@inheritdoc}
      */
     protected $fillable = [
         'relation_type',
@@ -34,18 +28,20 @@ class ShortLink extends Model
         'url',
         'hash',
         'expires_at',
-        'expires'
+        'expires',
     ];
 
     /**
-     * Table name filled from config via getTable()
-     * @var string
+     * {@inheritdoc}
      */
-    protected $table;
-
-    public function getTable()
+    public function __construct(array $attributes = [])
     {
-        $this->table = config('shortener.links_table');
-        return $this->table;
+        if (collect(class_uses_recursive(__CLASS__))->contains(SoftDeletes::class)) {
+            array_push($this->dates, 'expires_at');
+        }
+
+        parent::__construct($attributes);
+
+        $this->setTable(config('shortener.links_table'));
     }
 }

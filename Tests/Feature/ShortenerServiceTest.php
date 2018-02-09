@@ -1,4 +1,5 @@
 <?php
+
 namespace Sharelov\Shortener\Tests\Feature;
 
 use Carbon\Carbon;
@@ -22,7 +23,7 @@ class ShortenerServiceTest extends TestCase
     public function canGenerateHashForUrlAndStoreOnDatabase()
     {
         $shortener_service = (new ShortenerService((new ShortLinkRepository()), (new UrlHasher())));
-        
+
         $link = $shortener_service->make('https://www.testing.com');
         $this->assertNotEmpty($link->hash);
 
@@ -39,7 +40,7 @@ class ShortenerServiceTest extends TestCase
     {
         $repo = new ShortLinkRepository();
         $shortener_service = (new ShortenerService($repo, (new UrlHasher())));
-        
+
         // generate a url that expired yesterday
         $hash = $shortener_service->make('https://www.testing.com', Carbon::yesterday())->hash;
         $this->assertNotEmpty($hash);
@@ -56,11 +57,10 @@ class ShortenerServiceTest extends TestCase
     /** @test */
     public function canGenerateHashAndAutoGrow()
     {
-
         $shortener_service = (new ShortenerService((new ShortLinkRepository()), (new UrlHasher())));
 
-        $hash="";
-        $i =0;
+        $hash = '';
+        $i = 0;
         while (true) {
             // set length to 1 to make this faster
             $hash = $shortener_service->setHashLength(1)->make('https://www.testing.com/'.$hash)->hash;
