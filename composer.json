@@ -27,5 +27,15 @@
         "psr-4":{
             "Sharelov\\Shortener\\Tests\\":"Tests"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sharelov\\Shortener\\ShortenerServiceProvider"
+            ],
+            "aliases": {
+                "Shortener": "Sharelov\\Shortener\\Facades\\Shortener"
+            }
+        }
     }
 }
