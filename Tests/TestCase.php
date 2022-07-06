@@ -7,9 +7,11 @@ use Orchestra\Testbench\TestCase as OrchestraTestCase;
 class TestCase extends OrchestraTestCase
 {
     /**
-     * Custom test fixture setup.
+     * Setup the test environment.
+     *
+     * @return void
      */
-    protected function setUp()
+    protected function setUp() :void
     {
         parent::setUp();
         $this->getEnvironmentSetUp($this->app);
