@@ -1,3 +1,5 @@
 .idea
 .phpintel/
 vendor/
+
+.phpunit.result.cache

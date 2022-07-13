@@ -9,7 +9,7 @@ class TestCaseWithSoftDeletes extends OrchestraTestCase
     /**
      * Custom test fixture setup.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->getEnvironmentSetUp($this->app);

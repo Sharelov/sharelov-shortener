@@ -1,3 +1,6 @@
+## 4.0
+- Add support for laravel 5.8
+
 ## 3.0.4
 - Loosen hard requirement on `laravel/framework:5.4.*`
 

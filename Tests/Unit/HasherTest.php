@@ -2,8 +2,8 @@
 
 namespace Sharelov\Shortener\Test\Unit;
 
-use Sharelov\Shortener\Tests\TestCase;
 use Sharelov\Shortener\Utilities\UrlHasher;
+use Sharelov\Shortener\Tests\TestCase;
 
 class HasherTest extends TestCase
 {
@@ -29,11 +29,10 @@ class HasherTest extends TestCase
         $this->assertEquals($length, strlen($hash));
     }
 
-    /** @test
-     * @expectedException \Exception
-     */
+    /** @test */
     public function hashCantBeProducedWithoutSpecifyingLength()
     {
-        $hash = (new UrlHasher())->make();
+        $this->expectExceptionMessageMatches("/Hash length was not set\./i");
+        (new UrlHasher())->make();
     }
 }
