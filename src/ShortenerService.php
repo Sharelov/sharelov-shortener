@@ -2,10 +2,10 @@
 
 namespace Sharelov\Shortener;
 
-use Log;
-use Event;
 use Sharelov\Shortener\Utilities\UrlHasher;
 use Sharelov\Shortener\Repositories\ShortLinkRepository;
+use Log;
+use Event;
 
 class ShortenerService
 {
@@ -168,7 +168,7 @@ class ShortenerService
 
         $data = compact('url', 'hash', 'expires_at', 'expires', 'relation_type', 'relation_id');
 
-        Event::fire($this->linkRepo->getModelClassName().'.creating', [$data]);
+        Event::dispatch($this->linkRepo->getModelClassName().'.creating', [$data]);
 
         return $this->linkRepo->create($data);
     }
