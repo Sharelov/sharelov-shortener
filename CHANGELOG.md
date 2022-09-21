@@ -1,3 +1,6 @@
+## 5.0
+- Add support for laravel 6.x
+
 ## 4.0
 - Add support for laravel 5.8
 
