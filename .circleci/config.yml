@@ -20,7 +20,6 @@ jobs:
       - checkout
       - run: sudo apt update
       - run: sudo apt install -y php-sqlite3
-      - run: sudo docker-php-ext-install
       - run: sudo composer self-update --2
       # Download and cache dependencies
       - restore_cache:
