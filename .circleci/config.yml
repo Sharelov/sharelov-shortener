@@ -18,7 +18,8 @@ jobs:
 
     steps:
       - checkout
-      - run: sudo apt install -y sqlite3 zlib
+      - run: sudo apt update
+      - run: sudo apt install -y libsqlite3-dev zlib1g-dev
       - run: sudo docker-php-ext-install zip
       - run: sudo composer self-update --2
       # Download and cache dependencies
