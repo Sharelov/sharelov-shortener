@@ -20,7 +20,7 @@ class UrlHasher
      */
     public function make($length = null)
     {
-        if (! $length || ! is_numeric($length)) {
+        if (!$length || !is_numeric($length)) {
             throw new \Exception('Hash length was not set.');
         }
 

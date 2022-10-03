@@ -2,10 +2,10 @@
 
 namespace Sharelov\Shortener;
 
-use Sharelov\Shortener\Utilities\UrlHasher;
-use Sharelov\Shortener\Repositories\ShortLinkRepository;
-use Log;
 use Event;
+use Log;
+use Sharelov\Shortener\Repositories\ShortLinkRepository;
+use Sharelov\Shortener\Utilities\UrlHasher;
 
 class ShortenerService
 {
@@ -122,7 +122,7 @@ class ShortenerService
     {
         $link = $this->linkRepo->byHash($hash);
 
-        if (! $link || $this->linkRepo->expired($link)) {
+        if (!$link || $this->linkRepo->expired($link)) {
             return false;
         }
 
@@ -162,7 +162,7 @@ class ShortenerService
 
         $expires = $expires_at ? true : false;
 
-        if (! is_numeric($relation_id)) {
+        if (!is_numeric($relation_id)) {
             Log::error('ERROR: '.'Relation id was not numeric for url: '.$url);
         }
 
