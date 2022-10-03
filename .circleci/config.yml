@@ -18,6 +18,7 @@ jobs:
 
     steps:
       - checkout
+      - run: php --version
       - run: sudo apt update
       - run: sudo apt install -y php-sqlite3
       - run: sudo composer self-update --2
