@@ -2,9 +2,9 @@
 
 namespace Sharelov\Shortener\Repositories;
 
-use Sharelov\Shortener\Models\ShortLinkWithSoftDelete;
-use Sharelov\Shortener\Models\ShortLink;
 use Illuminate\Support\Arr;
+use Sharelov\Shortener\Models\ShortLink;
+use Sharelov\Shortener\Models\ShortLinkWithSoftDelete;
 
 class ShortLinkRepository
 {
@@ -15,7 +15,7 @@ class ShortLinkRepository
      */
     protected $model;
     /**
-     * String name of model class
+     * String name of model class.
      *
      * @var string The name of the model class
      */

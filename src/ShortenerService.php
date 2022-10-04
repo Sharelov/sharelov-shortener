@@ -2,10 +2,10 @@
 
 namespace Sharelov\Shortener;
 
-use Sharelov\Shortener\Utilities\UrlHasher;
-use Sharelov\Shortener\Repositories\ShortLinkRepository;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Log;
+use Sharelov\Shortener\Repositories\ShortLinkRepository;
+use Sharelov\Shortener\Utilities\UrlHasher;
 
 class ShortenerService
 {
@@ -132,10 +132,10 @@ class ShortenerService
     /**
      * Make a hash for a url and store it in the database.
      *
-     * @param string $url
+     * @param string      $url
      * @param string|null $expires_at
      * @param string|null $relation_type
-     * @param int|null $relation_id
+     * @param int|null    $relation_id
      *
      * @throws \Exception
      *
