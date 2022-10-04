@@ -2,8 +2,8 @@
 
 namespace Sharelov\Shortener\Test\Unit;
 
-use Sharelov\Shortener\Utilities\UrlHasher;
 use Sharelov\Shortener\Tests\TestCase;
+use Sharelov\Shortener\Utilities\UrlHasher;
 
 class HasherTest extends TestCase
 {

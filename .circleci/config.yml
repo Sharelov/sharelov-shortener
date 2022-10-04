@@ -7,8 +7,8 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/php:7.1-browsers
-      
+      - image: cimg/php:7.3.31-browsers
+
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -18,22 +18,23 @@ jobs:
 
     steps:
       - checkout
-      - run: sudo apt install -y libsqlite3-dev zlib1g-dev
-      - run: sudo docker-php-ext-install zip
-      - run: sudo composer self-update
+      - run: sudo apt update
+      - run: sudo apt install -y php7.3-sqlite3
+      - run: sudo composer self-update --2
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - composer-v1-{{ checksum "composer.json" }}
+          - composer-{{ checksum "composer.json" }}
           # fallback to using the latest cache if no exact match is found
-          - composer-v1-
+          - composer
 
       - run: composer install -n --prefer-dist --ignore-platform-reqs
 
       - save_cache:
           paths:
             - ./vendor
-          key: composer-v1-{{ checksum "composer.json" }}
-        
+          key: composer-{{ checksum "composer.json" }}
+
+
       # run tests!
       - run: ./vendor/bin/phpunit
