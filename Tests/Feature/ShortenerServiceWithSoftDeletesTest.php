@@ -2,13 +2,13 @@
 
 namespace Sharelov\Shortener\Tests\Feature;
 
-use Carbon\Carbon;
-use Sharelov\Shortener\Models\ShortLink;
-use Sharelov\Shortener\Models\ShortLinkWithSoftDelete;
-use Sharelov\Shortener\Repositories\ShortLinkRepository;
-use Sharelov\Shortener\ShortenerService;
-use Sharelov\Shortener\Tests\TestCaseWithSoftDeletes;
 use Sharelov\Shortener\Utilities\UrlHasher;
+use Sharelov\Shortener\Tests\TestCaseWithSoftDeletes;
+use Sharelov\Shortener\ShortenerService;
+use Sharelov\Shortener\Repositories\ShortLinkRepository;
+use Sharelov\Shortener\Models\ShortLinkWithSoftDelete;
+use Sharelov\Shortener\Models\ShortLink;
+use Illuminate\Support\Carbon;
 
 class ShortenerServiceWithSoftDeletesTest extends TestCaseWithSoftDeletes
 {
