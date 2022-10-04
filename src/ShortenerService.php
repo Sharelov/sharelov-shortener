@@ -2,10 +2,10 @@
 
 namespace Sharelov\Shortener;
 
-use Event;
-use Log;
-use Sharelov\Shortener\Repositories\ShortLinkRepository;
 use Sharelov\Shortener\Utilities\UrlHasher;
+use Sharelov\Shortener\Repositories\ShortLinkRepository;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Event;
 
 class ShortenerService
 {
