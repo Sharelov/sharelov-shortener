@@ -2,8 +2,9 @@
 
 namespace Sharelov\Shortener\Repositories;
 
-use Sharelov\Shortener\Models\ShortLink;
 use Sharelov\Shortener\Models\ShortLinkWithSoftDelete;
+use Sharelov\Shortener\Models\ShortLink;
+use Illuminate\Support\Arr;
 
 class ShortLinkRepository
 {
@@ -20,7 +21,7 @@ class ShortLinkRepository
         $this->model = new ShortLink();
         $this->model_class_name = 'ShortLink';
 
-        if (config('shortener.enable_soft_deletes') || array_get($config, 'enable_soft_deletes')) {
+        if (config('shortener.enable_soft_deletes') || Arr::get($config, 'enable_soft_deletes')) {
             $this->model = new ShortLinkWithSoftDelete();
             $this->model_class_name = 'ShortLinkWithSoftDelete';
         }
