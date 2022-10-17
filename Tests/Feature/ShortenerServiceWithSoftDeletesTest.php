@@ -2,7 +2,7 @@
 
 namespace Sharelov\Shortener\Tests\Feature;
 
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Sharelov\Shortener\Models\ShortLink;
 use Sharelov\Shortener\Models\ShortLinkWithSoftDelete;
 use Sharelov\Shortener\Repositories\ShortLinkRepository;

@@ -1,10 +1,8 @@
 ## Sharelov : URL Shortener
 
-[
-![StyleCI](https://styleci.io/repos/119410228/shield?style=plastic&branch=develop)
-](https://styleci.io/repos/119410228) [
-![CircleCI](https://circleci.com/gh/Sharelov/sharelov-shortener/tree/develop.svg?style=svg)
-](https://circleci.com/gh/Sharelov/sharelov-shortener/tree/develop)
+| develop  | master |
+|---|---|
+| [![StyleCI](https://styleci.io/repos/119410228/shield?style=plastic&branch=develop)](https://styleci.io/repos/119410228) [![CircleCI](https://circleci.com/gh/Sharelov/sharelov-shortener/tree/develop.svg?style=svg)](https://circleci.com/gh/Sharelov/sharelov-shortener/tree/develop)  | [![StyleCI](https://styleci.io/repos/119410228/shield?style=plastic&branch=master)](https://styleci.io/repos/119410228) [![CircleCI](https://circleci.com/gh/Sharelov/sharelov-shortener/tree/master.svg?style=svg)](https://circleci.com/gh/Sharelov/sharelov-shortener/tree/master) |
 
 # Installation
 
@@ -50,15 +48,12 @@ Route::get('/sh/{hash}',[
 
 Use this route to shorten a URL, if the URL already exists on the database it will return the hash code otherwise it will create  a new URL|Hash tuple and it will return a json response with the hash and the url with the current domain indicating the status of the request.
 
-The url recive the next as query parameters:
+The url receives the following query parameters:
 
-Url to process by the shortener:
+Url to process by the shortener: `url=urltoshorten`
 
-    `url=urltoshorten`
+Expiration date for the link `expires_at=YYYY-MM-DD` (don't specify this in order to make the link not expire)
 
-Expiration date for the link (don't specify this in order to make the link not expire)
-
-    `expires_at=Y-m-d`
 
 You can have an example of the requests on this postman collection:
 [PostMan Shortener Collection](https://www.getpostman.com/collections/ec779d63f1fe3af3bc6d)

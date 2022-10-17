@@ -29,7 +29,7 @@ class ShortLinksController extends Controller
         $domain = trim(rtrim(config('shortener.domain'), '/'));
         $path = trim(rtrim(config('shortener.path'), '/'));
 
-        if (! $domain) {
+        if (!$domain) {
             throw new ValidationException('Can\'t generate a valid url, check your shortener.php configuration');
         }
 
@@ -39,7 +39,7 @@ class ShortLinksController extends Controller
             $url = $domain.'/'.$path.'/'.$hash;
         }
 
-        if (! filter_var($url, FILTER_VALIDATE_URL)) {
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
             throw new ValidationException('Can\'t generate a valid url, check your shortener.php configuration');
         }
 
