@@ -22,7 +22,7 @@ class ShortenerServiceTest extends TestCase
     /** @test */
     public function canGenerateHashForUrlAndStoreOnDatabase()
     {
-        $shortener_service = (new ShortenerService((new ShortLinkRepository()), (new UrlHasher())));
+        $shortener_service = (new ShortenerService(new ShortLinkRepository(), new UrlHasher()));
 
         $link = $shortener_service->make('https://www.testing.com');
         $this->assertNotEmpty($link->hash);
@@ -34,12 +34,13 @@ class ShortenerServiceTest extends TestCase
 
     /**
      * @test
+     *
      * @depends canGenerateHashForUrlAndStoreOnDatabase
      */
     public function canGenerateHashForUrlAndStoreOnDatabaseThatsExpired()
     {
         $repo = new ShortLinkRepository();
-        $shortener_service = (new ShortenerService($repo, (new UrlHasher())));
+        $shortener_service = (new ShortenerService($repo, new UrlHasher()));
 
         // generate a url that expired yesterday
         $hash = $shortener_service->make('https://www.testing.com', Carbon::yesterday())->hash;
@@ -57,7 +58,7 @@ class ShortenerServiceTest extends TestCase
     /** @test */
     public function canGenerateHashAndAutoGrow()
     {
-        $shortener_service = (new ShortenerService((new ShortLinkRepository()), (new UrlHasher())));
+        $shortener_service = (new ShortenerService(new ShortLinkRepository(), new UrlHasher()));
 
         $hash = '';
         $i = 0;
