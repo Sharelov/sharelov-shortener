@@ -25,7 +25,7 @@ class ShortenerServiceWithSoftDeletesTest extends TestCaseWithSoftDeletes
     {
         $repository = new ShortLinkRepository($this->app->config['shortener']);
 
-        $shortener_service = (new ShortenerService($repository, (new UrlHasher())));
+        $shortener_service = (new ShortenerService($repository, new UrlHasher()));
 
         $link = $shortener_service->make('https://www.testing.com');
         $this->assertContainsOnlyInstancesOf(ShortLinkWithSoftDelete::class, [$link]);
@@ -38,8 +38,8 @@ class ShortenerServiceWithSoftDeletesTest extends TestCaseWithSoftDeletes
     public function canGenerateHashForUrlAndStoreOnDatabase()
     {
         $shortener_service = (new ShortenerService(
-            (new ShortLinkRepository($this->app->config['shortener'])),
-            (new UrlHasher())
+            new ShortLinkRepository($this->app->config['shortener']),
+            new UrlHasher()
         ));
 
         $link = $shortener_service->make('https://www.testing.com');
@@ -52,12 +52,13 @@ class ShortenerServiceWithSoftDeletesTest extends TestCaseWithSoftDeletes
 
     /**
      * @test
+     *
      * @depends canGenerateHashForUrlAndStoreOnDatabase
      */
     public function canGenerateHashForUrlAndStoreOnDatabaseThatsExpired()
     {
         $repo = new ShortLinkRepository($this->app->config['shortener']);
-        $shortener_service = (new ShortenerService($repo, (new UrlHasher())));
+        $shortener_service = (new ShortenerService($repo, new UrlHasher()));
 
         // generate a url that expired yesterday
         $link = $shortener_service->make('https://www.testing.com', Carbon::yesterday());
@@ -76,8 +77,8 @@ class ShortenerServiceWithSoftDeletesTest extends TestCaseWithSoftDeletes
     public function canGenerateHashAndAutoGrow()
     {
         $shortener_service = (new ShortenerService(
-            (new ShortLinkRepository($this->app->config['shortener'])),
-            (new UrlHasher())
+            new ShortLinkRepository($this->app->config['shortener']),
+            new UrlHasher()
         ));
 
         $hash = '';
