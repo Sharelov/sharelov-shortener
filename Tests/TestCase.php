@@ -3,6 +3,7 @@
 namespace Sharelov\Shortener\Tests;
 
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
+use Sharelov\Shortener\Models\ShortLink;
 
 class TestCase extends OrchestraTestCase
 {
@@ -32,6 +33,7 @@ class TestCase extends OrchestraTestCase
             'database' => ':memory:',
             'prefix'   => '',
         ]);
+        $app['config']->set('shortener.short_link_model', ShortLink::class);
         $app['config']->set('shortener.links_table', 'short_links');
         $app['config']->set('shortener.hash_length', 1);
     }
