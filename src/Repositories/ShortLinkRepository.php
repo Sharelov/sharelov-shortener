@@ -3,7 +3,6 @@
 namespace Sharelov\Shortener\Repositories;
 
 use Illuminate\Support\Arr;
-use Sharelov\Shortener\Models\ShortLink;
 use Sharelov\Shortener\Models\ShortLinkWithSoftDelete;
 
 class ShortLinkRepository
