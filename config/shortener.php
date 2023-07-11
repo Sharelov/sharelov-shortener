@@ -33,6 +33,11 @@ return [
     'links_table' => 'short_links',
 
     /*
+     * The fully qualified class name of the shortLink model.
+     */
+    'short_link_model' => Sharelov\Shortener\Models\ShortLink::class,
+
+    /*
      * Whether or not to enable soft deletes for the short links
      * table. Setting this to on, will activate a different
      * model (one that extends the basic one) which will

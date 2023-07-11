@@ -11,7 +11,7 @@ class ShortLinkRepository
     /**
      * Model to be used in the repository.
      *
-     * @var Illuminate\Database\Eloquent\Model
+     * @var \Illuminate\Database\Eloquent\Model
      */
     protected $model;
     /**
@@ -23,7 +23,8 @@ class ShortLinkRepository
 
     public function __construct($config = null)
     {
-        $this->model = new ShortLink();
+        $shortLinkClass = config('shortener.short_link_model');
+        $this->model = new $shortLinkClass();
         $this->model_class_name = 'ShortLink';
 
         if (config('shortener.enable_soft_deletes') || Arr::get($config, 'enable_soft_deletes')) {
