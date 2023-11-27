@@ -64,7 +64,6 @@ return [
 
     'max_attempts' => 3,
 
-
     /*
      * Increment a counter each time a shortlink is resolved
      */
