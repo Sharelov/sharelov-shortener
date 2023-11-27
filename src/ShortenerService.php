@@ -130,15 +130,17 @@ class ShortenerService
     }
 
     /**
-     * Fetch a short_link model with the given hash string
+     * Fetch a short_link model with the given hash string.
+     *
      * @param $hash
+     *
      * @return mixed boolean | Illuminate\Database\Eloquent\Model Can return a model or false when shortlink model is expired or not found.
      */
     public function getModelByHash($hash)
     {
         $link = $this->linkRepo->byHash($hash);
 
-        if(!$link || $this->linkRepo->expired($link)){
+        if (!$link || $this->linkRepo->expired($link)) {
             return false;
         }
 

@@ -65,7 +65,7 @@ class ShortLinksController extends Controller
         abort_unless($url, Response::HTTP_NOT_FOUND);
 
         if (config('shortener.counter')) {
-            ++$model->hits;
+            $model->hits++;
             $model->save();
         }
 

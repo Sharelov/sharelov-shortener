@@ -3,6 +3,7 @@
 namespace Sharelov\Shortener\Utilities;
 
 use Sharelov\Shortener\Utilities\Contracts\UrlHasher as HasherContract;
+
 class UrlHasher implements HasherContract
 {
     /**
@@ -37,8 +38,10 @@ class UrlHasher implements HasherContract
     }
 
     /**
-     * Set the character pool to something custom
+     * Set the character pool to something custom.
+     *
      * @param string $str The string containing the characters to generate a hash from
+     *
      * @return self Returns this instance after updating the character pool value.
      */
     public function setCharacterPool(string $str): self
