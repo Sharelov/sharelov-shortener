@@ -14,7 +14,7 @@ class UpdateShortenerTableAddHitsCount extends Migration
     public function up()
     {
         Schema::table(config('shortener.links_table'), function (Blueprint $table) {
-            $table->bigInteger('hits')->unsigned()->after('url');
+            $table->bigInteger('hits')->unsigned()->default(0)->after('url');
         });
     }
 
