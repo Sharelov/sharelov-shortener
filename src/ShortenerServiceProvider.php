@@ -16,7 +16,7 @@ class ShortenerServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/create_shortener_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_shortener_table.php'),
+            __DIR__.'/../database/migrations/create_shortener_table.php.stub'                => database_path('migrations/'.date('Y_m_d_His', time()).'_create_shortener_table.php'),
             __DIR__.'/../database/migrations/update_shortener_table_add_hits_count.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_update_shortener_table_add_hits_count.php'),
         ], 'migrations');
     }
