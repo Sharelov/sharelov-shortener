@@ -38,8 +38,8 @@ return [
     'short_link_model' => Sharelov\Shortener\Models\ShortLink::class,
 
     /*
-     * Whether or not to enable soft deletes for the short links
-     * table. Setting this to on, will activate a different
+     * Whether to enable soft deletes for the short links table
+     * or not. Setting this to on, will activate a different
      * model (one that extends the basic one) which will
      * use the soft deletes trait.
      */
@@ -65,7 +65,7 @@ return [
     'max_attempts' => 3,
 
     /*
-     * Increment a counter each time a shortlink is resolved
+     * Increment a counter each time a short_link is resolved
      */
 
     'counter' => true,
