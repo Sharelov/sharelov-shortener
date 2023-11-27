@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateShortenerTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table(config('shortener.links_table'), function (Blueprint $table) {
+            $table->bigInt('hits')->unsigned()->after('url');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table(config('shortener.links_table'), function (Blueprint $table) {
+            $table->dropColumn('hits');
+        }
+    }
+}
