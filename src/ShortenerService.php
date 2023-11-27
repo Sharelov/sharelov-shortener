@@ -5,7 +5,7 @@ namespace Sharelov\Shortener;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Sharelov\Shortener\Repositories\ShortLinkRepository;
-use Sharelov\Shortener\Utilities\UrlHasher;
+use Sharelov\Shortener\Utilities\Contracts\UrlHasher;
 
 class ShortenerService
 {
@@ -127,6 +127,22 @@ class ShortenerService
         }
 
         return $link->url;
+    }
+
+    /**
+     * Fetch a short_link model with the given hash string
+     * @param $hash
+     * @return mixed boolean | Illuminate\Database\Eloquent\Model Can return a model or false when shortlink model is expired or not found.
+     */
+    public function getModelByHash($hash)
+    {
+        $link = $this->linkRepo->byHash($hash);
+
+        if(!$link || $this->linkRepo->expired($link)){
+            return false;
+        }
+
+        return $link;
     }
 
     /**
