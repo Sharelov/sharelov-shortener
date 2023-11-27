@@ -27,6 +27,6 @@ class CreateShortenerTable extends Migration
     {
         Schema::table(config('shortener.links_table'), function (Blueprint $table) {
             $table->dropColumn('hits');
-        }
+        });
     }
 }
