@@ -3,6 +3,9 @@
 namespace Sharelov\Shortener;
 
 use Illuminate\Support\ServiceProvider;
+use Sharelov\Shortener\Utilities\Contracts\UrlHasherInterface;
+use Sharelov\Shortener\Utilities\UrlHasher;
+use Illuminate\Contracts\Foundation\Application;
 
 class ShortenerServiceProvider extends ServiceProvider
 {
@@ -11,6 +14,12 @@ class ShortenerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app->when(ShortenerService::class)
+            ->needs(UrlHasherInterface::class)
+            ->give(function(){
+                return new UrlHasher();
+            });
+
         $this->publishes([
             __DIR__.'/../config/shortener.php' => config_path('shortener.php'),
         ], 'config');
@@ -29,6 +38,8 @@ class ShortenerServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/shortener.php', 'shortener');
 
         $this->app->bind('Shortener', ShortenerService::class);
+
+
 
         $this->app->make(
             'Sharelov\Shortener\Controllers\ShortLinksController'

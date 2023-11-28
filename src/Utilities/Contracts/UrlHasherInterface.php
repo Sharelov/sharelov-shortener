@@ -2,7 +2,7 @@
 
 namespace Sharelov\Shortener\Utilities\Contracts;
 
-interface UrlHasher
+interface UrlHasherInterface
 {
     public function make(int $length = null);
 

@@ -2,9 +2,9 @@
 
 namespace Sharelov\Shortener\Utilities;
 
-use Sharelov\Shortener\Utilities\Contracts\UrlHasher as HasherContract;
+use Sharelov\Shortener\Utilities\Contracts\UrlHasherInterface;
 
-class UrlHasher implements HasherContract
+class UrlHasher implements UrlHasherInterface
 {
     /**
      * @var string
