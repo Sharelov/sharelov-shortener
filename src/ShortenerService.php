@@ -37,7 +37,7 @@ class ShortenerService
      * Initialize the class instance with what we need to work out the shortlinks.
      *
      * @param ShortLinkRepository $linkRepo
-     * @param UrlHasherInterface           $urlHasher
+     * @param UrlHasherInterface  $urlHasher
      *
      * @return $this instance
      */
