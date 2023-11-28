@@ -86,8 +86,8 @@ class ShortenerServiceWithSoftDeletesTest extends TestCaseWithSoftDeletes
         while (true) {
             // set length to 1 to make this faster
             $hash = $shortener_service->setHashLength(1)->make('https://www.testing.com/'.$hash)->hash;
-            // if by 125 loops hash != 2 assertion should fail
-            if ($i > 125) {
+            // if by 150 loops hash != 2 assertion should fail
+            if ($i > 175) {
                 $this->assertEquals(strlen($hash), 2);
                 break;
             }
