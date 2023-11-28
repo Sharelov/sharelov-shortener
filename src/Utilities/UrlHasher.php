@@ -2,7 +2,9 @@
 
 namespace Sharelov\Shortener\Utilities;
 
-class UrlHasher
+use Sharelov\Shortener\Utilities\Contracts\UrlHasherInterface;
+
+class UrlHasher implements UrlHasherInterface
 {
     /**
      * @var string
@@ -33,5 +35,19 @@ class UrlHasher
         }
 
         return $hash;
+    }
+
+    /**
+     * Set the character pool to something custom.
+     *
+     * @param string $str The string containing the characters to generate a hash from
+     *
+     * @return self Returns this instance after updating the character pool value.
+     */
+    public function setCharacterPool(string $str): self
+    {
+        $this->pool = $str;
+
+        return $this;
     }
 }

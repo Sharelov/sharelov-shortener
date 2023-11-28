@@ -59,9 +59,15 @@ class ShortLinksController extends Controller
      */
     public function translateHash($hash)
     {
-        $url = Shortener::getUrlByHash($hash);
+        $model = Shortener::getModelByHash($hash);
+        $url = optional($model)->url;
 
         abort_unless($url, Response::HTTP_NOT_FOUND);
+
+        if (config('shortener.counter')) {
+            $model->hits++;
+            $model->save();
+        }
 
         return redirect()->to($url);
     }
