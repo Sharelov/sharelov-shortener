@@ -1,3 +1,16 @@
+## 11.0
+
+- Add support for laravel 11.x
+
+## 10.0
+
+- General updates and fixes.
+- Add counter for shortlink resolutions.
+
+## 9.0
+
+- Add support for laravel 10.x
+
 ## 8.0
 
 - Add support for laravel 9.x
